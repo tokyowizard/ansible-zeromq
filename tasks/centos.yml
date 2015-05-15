@@ -1,0 +1,23 @@
+- name: "Ensure the old zeromq library is not installed"
+  yum: >
+    name={{ item }}
+    state=absent
+  with_items:
+    - zeromq
+    - zeromq-devel
+    - libzmq3
+  tags:
+    - zeromq
+    - pkgs
+
+- name: "Ensure zmq is installed"
+  yum: >
+    name={{ item }}
+    state=present
+    enablerepo=epel
+  with_items:
+    - zeromq3
+    - zeromq3-devel
+  tags:
+    - zeromq
+    - pkgs
