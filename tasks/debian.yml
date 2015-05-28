@@ -1,3 +1,12 @@
+- name: "Add wheezy-backport to sources.list"
+  apt_repository: >
+    state=present
+    repo="deb http://http.debian.net/debian wheezy-backports main"
+  when: ansible_distribution_major_version|int == 7
+  tags:
+    - zeromq
+    - repos
+
 - name: "Ensure zmq is installed"
   apt: >
     name={{ item }}
